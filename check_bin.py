@@ -2,7 +2,6 @@
 # coding: utf-8
 
 from types import StringTypes
-import ipdb
 import logging
 
 log = logging.getLogger('')
