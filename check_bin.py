@@ -3,6 +3,7 @@
 
 from types import StringTypes
 import logging
+import fcntl
 
 log = logging.getLogger('')
 log.setLevel(logging.DEBUG)
