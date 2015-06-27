@@ -51,8 +51,19 @@ def get_next_date(html):
             log.debug("%s on %s" % (bin_type, bin_date))
             return bin_date
 
-# get browser
 log.info("starting")
+
+# check lock
+file = "/tmp/" + __file__ + ".lock"
+fd = open(file, 'w')
+try:
+    fcntl.lockf(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    log.debug("checked lock ok")
+except IOError:
+    log.warning("another process is running with lock. quitting!")
+    exit(1)
+
+# get browser
 br = mechanize.Browser()
 br.open('https://www.bristol.gov.uk/forms/collection-day-finder#step1')
 
