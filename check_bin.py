@@ -69,21 +69,21 @@ br = mechanize.Browser()
 br.open('https://www.bristol.gov.uk/forms/collection-day-finder#step1')
 
 # forms aren't named, so have to use index
-br.form = list(br.forms())[1]
+br.form = list(br.forms())[0]
 
 # fill in the postcode & submit
 br['postcode'] = postcode
 response = br.submit()
 
 # get the address id & submit
-br.form = list(br.forms())[1]
+br.form = list(br.forms())[0]
 address_id = get_address_id(br)
 assert type(address_id) in StringTypes, "address not found"
 br['find-address-select'] = [address_id] # have to assign as sequence
 response = br.submit()
 
 # submit again for pointless confirmation stage
-br.form = list(br.forms())[1]
+br.form = list(br.forms())[0]
 response = br.submit()
 
 # parse the date
